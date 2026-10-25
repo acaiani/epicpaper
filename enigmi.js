@@ -29,16 +29,18 @@ window.EPIC = {
     {
       titolo: "Deduzione",
       testo:
-        "<p>Uno tra Anna, Bruno, Carla e Dario ha rotto il vaso. Interrogati, dichiarano:</p>" +
+        "<p>Uno tra Axion, Bryx, Cyra, Dax, Elyra e Fenix ha rubato il chip. Interrogati, dichiarano:</p>" +
         "<ul>" +
-        "<li><b>Anna:</b> «È stato Bruno.»</li>" +
-        "<li><b>Bruno:</b> «È stata Carla.»</li>" +
-        "<li><b>Carla:</b> «Bruno mente.»</li>" +
-        "<li><b>Dario:</b> «Non sono stato io.»</li>" +
+        "<li><b>Axion:</b> «È stato Bryx oppure Cyra.»</li>" +
+        "<li><b>Bryx:</b> «Fenix mente.»</li>" +
+        "<li><b>Cyra:</b> «Non è stato né Dax né Elyra.»</li>" +
+        "<li><b>Dax:</b> «Axion dice la verità.»</li>" +
+        "<li><b>Elyra:</b> «Il colpevole è tra Axion, Bryx e Cyra.»</li>" +
+        "<li><b>Fenix:</b> «È stata Elyra.»</li>" +
         "</ul>" +
-        "<p>Uno solo di loro dice la verità.</p><p>Chi ha rotto il vaso?</p>",
-      hash: "9d3232a0dec2f346e9218bf7661d413a08489425a7db9790cf18bd4653bae589",
-      aiuto: "Bruno e Carla non possono dire entrambi la verità, e nemmeno mentire entrambi. Quindi l'unica persona sincera è uno di loro due… e gli altri due mentono."
+        "<p>Esattamente <b>due</b> di loro dicono la verità.</p><p>Chi ha rubato il chip?</p>",
+      hash: "32758dd4d5e425e3426c2f22ff43092ba6b2e7c22bee439c61351f5d61661fa2",
+      aiuto: "Se Axion dicesse il vero, lo direbbe anche Dax. E tra Bryx e Fenix, esattamente uno dei due dice la verità."
     },
     {
       titolo: "Combinazione",

@@ -83,6 +83,10 @@
   .msg { min-height: 1.6em; margin-top: 12px; font-size: 14px; }
   .msg.err { color: var(--warn); }
   .msg.ok { color: var(--accent); }
+  .pausa { color: var(--warn); font-size: 14px; opacity: .85; }
+  .pausa:empty { display: none; }
+  input[type=text]:disabled, .btn:disabled { opacity: .35; cursor: not-allowed; }
+  .btn:disabled:hover { background: transparent; color: var(--accent); }
   .shake { animation: shake .35s; }
   @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
   .glitch { animation: glitch .5s steps(2) 1; }
@@ -120,9 +124,10 @@
     <div class="testo" id="e-testo"></div>
     <form id="e-form" autocomplete="off">
       <input type="text" id="e-input" placeholder="&gt; risposta" autocapitalize="none" autocorrect="off" spellcheck="false" aria-label="Risposta">
-      <button class="btn" type="submit">Invia</button>
+      <button class="btn" type="submit" id="e-invia">Invia</button>
     </form>
     <div class="msg" id="e-msg" role="status" aria-live="polite"></div>
+    <div class="pausa" id="e-pausa"></div>
     <details class="aiuto" id="e-aiuto"><summary>Richiedi aiuto (penalità sul punteggio di intelligenza)</summary><p id="e-aiuto-testo"></p></details>
   </section>
 
@@ -214,11 +219,13 @@
     $("e-aiuto").open = false;
     $("e-aiuto").style.display = e.aiuto ? "" : "none";
     $("e-aiuto-testo").innerHTML = e.aiuto || "";
+    $("e-pausa").textContent = "";
+    conto();
   }
   $("e-form").addEventListener("submit", function (ev) {
     ev.preventDefault();
     var i = stato.risposte.length, v = $("e-input").value, m = $("e-msg");
-    if (!normalizza(v)) return;
+    if (!normalizza(v) || bloccato()) return;
     if (hash(v) === E.enigmi[i].hash) {
       stato.risposte.push(v); salva();
       m.className = "msg ok"; m.textContent = "VERIFICA SUPERATA.";
@@ -227,8 +234,27 @@
     } else {
       m.className = "msg err"; m.textContent = sbagli[nSbagli++ % sbagli.length];
       var w = $("s-enigma"); w.classList.remove("shake", "glitch"); void w.offsetWidth; w.classList.add("shake", "glitch");
+      stato.blocco = Date.now() + PAUSA * 1000; salva();
+      conto();
     }
   });
+
+  // --- pausa dopo una risposta sbagliata (sopravvive al ricaricamento) ---
+  var PAUSA = 60, timer = null;
+  function bloccato() { return stato.blocco && Date.now() < stato.blocco; }
+  function conto() {
+    clearTimeout(timer);
+    var inp = $("e-input"), btn = $("e-invia"), cd = $("e-pausa");
+    if (bloccato()) {
+      var s = Math.ceil((stato.blocco - Date.now()) / 1000);
+      inp.disabled = btn.disabled = true;
+      cd.textContent = "Sistema bloccato per eccesso di errori. Nuovo tentativo tra " + s + " s.";
+      timer = setTimeout(conto, 250);
+    } else {
+      inp.disabled = btn.disabled = false;
+      if (cd.textContent) { cd.textContent = ""; $("e-msg").textContent = ""; inp.focus(); }
+    }
+  }
 
   // --- accesso concesso: il nome del paper deriva dalle risposte ---
   function concesso() {
