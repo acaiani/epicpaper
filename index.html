@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050807">
+<title>Epic Paper · Accesso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050807;
+    --fg: #b8f5c8;
+    --dim: #5f8f6c;
+    --accent: #6dffa0;
+    --warn: #ff5c5c;
+    --line: #1c2d22;
+    --panel: #0a110d;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.55 "IBM Plex Mono", ui-monospace, monospace;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::after { /* scanlines */
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 10;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 3px);
+  }
+  body::before { /* vignetta */
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.65) 100%);
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 28px 16px 64px; position: relative; z-index: 1; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 22px; }
+  .logo { font-family: "VT323", monospace; font-size: 52px; line-height: .9; color: var(--accent);
+          letter-spacing: 2px; text-shadow: 0 0 12px rgba(109,255,160,.45); }
+  .sub { color: var(--dim); font-size: 13px; letter-spacing: .5px; text-transform: uppercase; }
+  .screen { display: none; }
+  .screen.on { display: block; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .boot p { margin: 0 0 6px; white-space: pre-wrap; }
+  .boot .k { color: var(--dim); }
+  .cursor { display: inline-block; width: .6em; height: 1.1em; background: var(--accent); vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .btn {
+    display: inline-block; margin-top: 18px; padding: 12px 18px; min-height: 48px;
+    font: 600 15px "IBM Plex Mono", monospace; letter-spacing: 1px; text-transform: uppercase;
+    background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px;
+    cursor: pointer; text-decoration: none; -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--accent); color: var(--bg); outline: none; }
+  .btn.ghost { border-color: var(--line); color: var(--dim); font-weight: 400; }
+  .btn.ghost:hover { background: var(--line); color: var(--fg); }
+  .progress { display: flex; gap: 6px; margin-bottom: 18px; }
+  .progress span { flex: 1; height: 6px; background: var(--line); }
+  .progress span.done { background: var(--accent); box-shadow: 0 0 8px rgba(109,255,160,.5); }
+  .progress span.cur { background: var(--dim); animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .4; } }
+  .tag { color: var(--dim); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  h2 { font-family: "VT323", monospace; font-weight: 400; font-size: 36px; line-height: 1; margin: 4px 0 16px; color: var(--accent); }
+  .testo { background: var(--panel); border: 1px solid var(--line); padding: 16px; }
+  .testo img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
+  .testo p:first-child { margin-top: 0; } .testo p:last-child { margin-bottom: 0; }
+  .testo ul { padding-left: 18px; margin: 10px 0; } .testo li { margin: 4px 0; }
+  .testo .seq { font-family: "VT323", monospace; font-size: 30px; line-height: 1.15; color: var(--accent); letter-spacing: 3px; }
+  .testo table.codici { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 14px; }
+  .testo .codici td { border-top: 1px solid var(--line); padding: 8px 6px; vertical-align: middle; }
+  .testo .codici td:first-child { font-family: "VT323", monospace; font-size: 28px; color: var(--accent); white-space: nowrap; letter-spacing: 2px; width: 1%; padding-right: 14px; }
+  form { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+  input[type=text] {
+    flex: 1 1 220px; min-height: 48px; padding: 10px 12px;
+    font: 18px "IBM Plex Mono", monospace; color: var(--fg); background: #000;
+    border: 1px solid var(--dim); border-radius: 2px; caret-color: var(--accent);
+  }
+  input[type=text]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(109,255,160,.18); }
+  form .btn { margin-top: 0; }
+  .msg { min-height: 1.6em; margin-top: 12px; font-size: 14px; }
+  .msg.err { color: var(--warn); }
+  .msg.ok { color: var(--accent); }
+  .shake { animation: shake .35s; }
+  @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+  .glitch { animation: glitch .5s steps(2) 1; }
+  @keyframes glitch { 0% { filter: hue-rotate(0) } 33% { filter: hue-rotate(140deg) contrast(1.6); transform: skewX(4deg) } 66% { filter: invert(1); transform: skewX(-3deg) } 100% { filter: none } }
+  .aiuto { margin-top: 18px; border-top: 1px dashed var(--line); padding-top: 12px; }
+  .aiuto summary { cursor: pointer; color: var(--dim); font-size: 14px; list-style: none; }
+  .aiuto summary::-webkit-details-marker { display: none; }
+  .aiuto summary::before { content: "[?] "; }
+  .aiuto p { margin: 8px 0 0; color: var(--fg); font-size: 14px; }
+  .granted { text-align: center; padding-top: 30px; }
+  .granted .big { font-family: "VT323", monospace; font-size: 58px; line-height: 1; color: var(--accent); text-shadow: 0 0 18px rgba(109,255,160,.6); }
+  footer { margin-top: 40px; color: var(--dim); font-size: 12px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  footer button { background: none; border: 0; color: var(--dim); font: inherit; text-decoration: underline; cursor: pointer; padding: 0; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">EPIC PAPER</div>
+    <div class="sub" id="numero">Archivio della conoscenza superiore</div>
+  </header>
+
+  <!-- INGRESSO -->
+  <section class="screen boot" id="s-intro">
+    <div id="bootlines"></div>
+    <button class="btn" id="avvia" style="display:none">Avvia la verifica</button>
+  </section>
+
+  <!-- ENIGMA -->
+  <section class="screen" id="s-enigma">
+    <div class="progress" id="progress"></div>
+    <div class="tag" id="e-tag"></div>
+    <h2 id="e-titolo"></h2>
+    <div class="testo" id="e-testo"></div>
+    <form id="e-form" autocomplete="off">
+      <input type="text" id="e-input" placeholder="&gt; risposta" autocapitalize="none" autocorrect="off" spellcheck="false" aria-label="Risposta">
+      <button class="btn" type="submit">Invia</button>
+    </form>
+    <div class="msg" id="e-msg" role="status" aria-live="polite"></div>
+    <details class="aiuto" id="e-aiuto"><summary>Richiedi aiuto (penalità sul punteggio di intelligenza)</summary><p id="e-aiuto-testo"></p></details>
+  </section>
+
+  <!-- ACCESSO CONCESSO -->
+  <section class="screen granted" id="s-ok">
+    <div class="progress" id="progress-ok"></div>
+    <div class="big">ACCESSO<br>CONCESSO</div>
+    <p>Livello cognitivo verificato.<br>Benvenuti tra i più intelligenti.</p>
+    <a class="btn" id="apri">Apri il paper</a>
+  </section>
+
+  <footer>
+    <span>EPIC PAPER © 2094 · Consorzio delle menti superiori</span>
+    <button id="reset" type="button">ricomincia</button>
+  </footer>
+</div>
+
+<script src="sha256.js"></script>
+<script src="enigmi.js"></script>
+<script>
+(function () {
+  var E = window.EPIC, N = E.enigmi.length, KEY = "epicpaper-progresso";
+  var $ = function (id) { return document.getElementById(id); };
+  document.getElementById("numero").textContent = "Archivio della conoscenza superiore · " + E.numero;
+
+  // --- stato (salvato sul telefono; se non disponibile, solo in memoria) ---
+  var stato = { risposte: [] };
+  try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && Array.isArray(s.risposte)) stato = s; } catch (e) {}
+  function salva() { try { localStorage.setItem(KEY, JSON.stringify(stato)); } catch (e) {} }
+  function hash(x) { return sha256(E.sale + "|" + normalizza(x)); }
+  // scarta risposte salvate non più valide (es. enigmi modificati)
+  stato.risposte = stato.risposte.filter(function (r, i) { return E.enigmi[i] && hash(r) === E.enigmi[i].hash; });
+
+  function mostra(id) {
+    ["s-intro", "s-enigma", "s-ok"].forEach(function (x) { $(x).classList.toggle("on", x === id); });
+    window.scrollTo(0, 0);
+  }
+  function barra(el, cur) {
+    el.innerHTML = "";
+    for (var i = 0; i < N; i++) {
+      var s = document.createElement("span");
+      if (i < stato.risposte.length) s.className = "done"; else if (i === cur) s.className = "cur";
+      el.appendChild(s);
+    }
+  }
+
+  // --- intro con effetto terminale ---
+  var righe = [
+    ["k", "> connessione al nodo 2094 ........ OK"],
+    ["k", "> nuovo numero disponibile: " + E.numero],
+    ["", "Epic Paper pubblica solo ricerca destinata a menti superiori."],
+    ["", "Per proteggere la conoscenza, l'accesso è subordinato a " + N + " verifiche cognitive."],
+    ["", "Chi non le supera non è pronto a comprenderla."]
+  ];
+  function intro() {
+    mostra("s-intro");
+    var box = $("bootlines"); box.innerHTML = "";
+    var i = 0, veloce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    (function next() {
+      if (i >= righe.length) { $("avvia").style.display = "inline-block"; return; }
+      var p = document.createElement("p"); p.className = righe[i][0]; box.appendChild(p);
+      var t = righe[i][1], c = 0, cur = document.createElement("span"); cur.className = "cursor";
+      (function type() {
+        p.textContent = t.slice(0, ++c); p.appendChild(cur);
+        if (c < t.length && !veloce) setTimeout(type, 14);
+        else { cur.remove(); i++; setTimeout(next, veloce ? 0 : 220); }
+      })();
+    })();
+  }
+
+  // --- enigma ---
+  var sbagli = [
+    "RISPOSTA NON VALIDA · capacità cognitive insufficienti.",
+    "ERRORE · il Consorzio è deluso.",
+    "NEGATO · riprovate, se ne siete capaci.",
+    "NON CORRETTO · forse un caffè aiuterebbe.",
+    "RIFIUTATO · neanche un algoritmo del 2026 sbaglierebbe così."
+  ], nSbagli = 0;
+  function enigma() {
+    var i = stato.risposte.length;
+    if (i >= N) return concesso();
+    var e = E.enigmi[i];
+    mostra("s-enigma");
+    barra($("progress"), i);
+    $("e-tag").textContent = "Verifica " + (i + 1) + " di " + N;
+    $("e-titolo").textContent = e.titolo;
+    $("e-testo").innerHTML = e.testo;
+    $("e-input").value = ""; $("e-msg").textContent = ""; $("e-msg").className = "msg";
+    $("e-aiuto").open = false;
+    $("e-aiuto").style.display = e.aiuto ? "" : "none";
+    $("e-aiuto-testo").innerHTML = e.aiuto || "";
+  }
+  $("e-form").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var i = stato.risposte.length, v = $("e-input").value, m = $("e-msg");
+    if (!normalizza(v)) return;
+    if (hash(v) === E.enigmi[i].hash) {
+      stato.risposte.push(v); salva();
+      m.className = "msg ok"; m.textContent = "VERIFICA SUPERATA.";
+      barra($("progress"), i + 1);
+      setTimeout(enigma, 900);
+    } else {
+      m.className = "msg err"; m.textContent = sbagli[nSbagli++ % sbagli.length];
+      var w = $("s-enigma"); w.classList.remove("shake", "glitch"); void w.offsetWidth; w.classList.add("shake", "glitch");
+    }
+  });
+
+  // --- accesso concesso: il nome del paper deriva dalle risposte ---
+  function concesso() {
+    mostra("s-ok");
+    barra($("progress-ok"), N);
+    var nome = sha256(E.sale + "|paper|" + stato.risposte.map(normalizza).join("|")).slice(0, 20);
+    $("apri").href = "p/" + nome + ".html";
+  }
+
+  $("avvia").addEventListener("click", enigma);
+  $("reset").addEventListener("click", function () { stato = { risposte: [] }; salva(); intro(); });
+
+  if (stato.risposte.length) enigma(); else intro();
+})();
+</script>
+</body>
+</html>
