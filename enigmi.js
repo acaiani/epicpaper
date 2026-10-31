@@ -45,17 +45,34 @@ window.EPIC = {
     {
       titolo: "Combinazione",
       testo:
-        "<p>Il codice ha <b>3 cifre, tutte diverse</b>.</p>" +
+        "<p>Il codice ha <b>4 cifre, tutte diverse</b>.</p>" +
         "<table class='codici'>" +
-        "<tr><td>7 0 3</td><td>una cifra giusta, al posto giusto</td></tr>" +
-        "<tr><td>1 7 3</td><td>una cifra giusta, al posto sbagliato</td></tr>" +
-        "<tr><td>1 7 5</td><td>due cifre giuste, entrambe al posto sbagliato</td></tr>" +
-        "<tr><td>0 6 4</td><td>nessuna cifra giusta</td></tr>" +
-        "<tr><td>0 2 6</td><td>una cifra giusta, al posto sbagliato</td></tr>" +
+        "<tr><td>4 7 8 1</td><td>una cifra giusta, al posto sbagliato</td></tr>" +
+        "<tr><td>9 7 3 2</td><td>due cifre giuste: una al posto giusto, una al posto sbagliato</td></tr>" +
+        "<tr><td>5 7 6 0</td><td>una cifra giusta, al posto giusto</td></tr>" +
+        "<tr><td>6 0 4 7</td><td>nessuna cifra giusta</td></tr>" +
+        "<tr><td>5 7 6 9</td><td>due cifre giuste: una al posto giusto, una al posto sbagliato</td></tr>" +
+        "<tr><td>8 2 1 7</td><td>una cifra giusta, al posto sbagliato</td></tr>" +
         "</table>" +
         "<p>Qual è il codice?</p>",
-      hash: "bba16b97c95ed372fd51330ee562abd5cb9758700625c89bd566139c30279446",
-      aiuto: "Partite dalla riga senza cifre giuste: 0, 6 e 4 sono eliminati. Poi guardate quale cifra hanno in comune le prime tre righe."
+      hash: "ad30949d817d802578109c362e87d509a3ec0150792f495f6048d91d1785fd99",
+      aiuto: "Partite dalla riga senza cifre giuste: 6, 0, 4 e 7 sono eliminati. Guardate allora cosa resta della riga 5 7 6 0."
+    },
+    {
+      titolo: "Incroci",
+      testo:
+        "<p>Nova, Orion e Zephyr vivono su tre pianeti diversi (Kepler, Titano, Proxima) e hanno tre robot diversi (dorato, argentato, ramato).</p>" +
+        "<ul>" +
+        "<li>Orion non vive su Kepler.</li>" +
+        "<li>Chi vive su Titano non ha il robot dorato.</li>" +
+        "<li>Orion non vive su Titano.</li>" +
+        "<li>Chi vive su Titano non ha il robot ramato.</li>" +
+        "<li>Zephyr non ha il robot argentato.</li>" +
+        "<li>Chi vive su Kepler non ha il robot dorato.</li>" +
+        "</ul>" +
+        "<p>Chi ha il robot ramato?</p>",
+      hash: "33d8e38b4c1c9ecbee54c6538c6779f963cfcbde0157a46cf615969cb4dec7fe",
+      aiuto: "Disegnate una tabella. Iniziate da dove vive Orion, poi capite che robot c'è su ogni pianeta."
     }
   ]
 };
