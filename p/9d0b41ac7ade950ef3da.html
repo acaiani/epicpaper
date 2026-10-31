@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Epic Paper · Inattivazione catalitica</title>
+<!-- PAPER (versione 25/10, sera). Il testo non nomina mai limone e sale:
+     la combinazione vincente e le dosi emergono solo da Fig. 1 e didascalia.
+     Accenno leggero al colore: "viraggio" misurato per via colorimetrica. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --paper: #fffdf8; --ink: #1d1c1a; --mute: #6b665d; --rule: #d9d3c6;
+    --accent: #0f6b4a; --hl: #c8432b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #121311; --paper: #1a1b19; --ink: #e9e6de; --mute: #9d988c; --rule: #33352f; --accent: #5fd1a1; --hl: #ff7a5c; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--bg); color: var(--ink); font: 17px/1.62 "Source Serif 4", Georgia, serif; overflow-x: hidden; }
+  .bar { background: #050807; color: #6dffa0; font: 12px "IBM Plex Mono", monospace; padding: 8px 16px; letter-spacing: .5px; }
+  .bar span { color: #5f8f6c; }
+  article { max-width: 720px; margin: 0 auto; background: var(--paper); padding: 28px 16px 56px; }
+  @media (min-width: 760px) { article { margin: 28px auto; padding: 48px 56px 64px; border: 1px solid var(--rule); } }
+  .mast { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap;
+          border-bottom: 3px double var(--ink); padding-bottom: 8px; margin-bottom: 22px; }
+  .mast b { font: 600 24px "IBM Plex Sans", sans-serif; letter-spacing: 3px; }
+  .mast small { font: 12px "IBM Plex Sans", sans-serif; color: var(--mute); text-transform: uppercase; letter-spacing: 1px; }
+  .kicker { font: 600 12px "IBM Plex Sans", sans-serif; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); }
+  h1 { font-size: clamp(26px, 6vw, 36px); line-height: 1.15; margin: 6px 0 14px; font-weight: 600; }
+  .authors { font: 15px "IBM Plex Sans", sans-serif; margin: 0; }
+  .aff { font: 13px "IBM Plex Sans", sans-serif; color: var(--mute); margin: 4px 0 0; }
+  .meta { font: 12px "IBM Plex Mono", monospace; color: var(--mute); margin: 12px 0 24px; }
+  .abstract { border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); padding: 14px 16px; margin: 0 0 28px; }
+  .abstract h2 { margin-top: 0; }
+  h2 { font: 600 14px "IBM Plex Sans", sans-serif; text-transform: uppercase; letter-spacing: 1.2px; margin: 30px 0 8px; }
+  p { margin: 0 0 14px; }
+  figure { margin: 26px 0; padding: 16px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  figcaption { font: 14px/1.5 "IBM Plex Sans", sans-serif; color: var(--mute); margin-top: 10px; }
+  figcaption b { color: var(--ink); }
+  svg text { font-family: "IBM Plex Sans", sans-serif; fill: var(--ink); }
+  svg .lab { font-size: 21px; }
+  svg .val { font-size: 19px; fill: var(--mute); }
+  svg .axis { stroke: var(--rule); }
+  svg .b { fill: var(--mute); opacity: .55; }
+  svg .b.top { fill: var(--hl); opacity: 1; }
+  svg .val.top { fill: var(--hl); font-weight: 600; }
+  .key { background: color-mix(in srgb, var(--hl) 10%, transparent); padding: 1px 4px; }
+  .refs { font: 13px/1.5 "IBM Plex Sans", sans-serif; color: var(--mute); padding-left: 18px; }
+  .foot { margin-top: 36px; padding-top: 12px; border-top: 1px solid var(--rule); font: 12px "IBM Plex Sans", sans-serif; color: var(--mute); }
+</style>
+</head>
+<body>
+<div class="bar">&gt; accesso verificato <span>· documento riservato alle menti superiori</span></div>
+<article>
+  <div class="mast"><b>EPIC PAPER</b><small>Vol. 71 · N. 10 · Ottobre 2094</small></div>
+
+  <div class="kicker">Articolo di ricerca · Biochimica delle bevande</div>
+  <h1>Inattivazione catalitica dell'agente della Sindrome del 2092 mediante additivi alimentari comuni</h1>
+  <p class="authors">M. Ferraresi, L. Okonkwo-Bianchi, T. Haraldsen</p>
+  <p class="aff">Istituto di Archeologia Alimentare, Megalopoli Padana Sud</p>
+  <p class="meta">Ricevuto 2 set 2094 · Accettato 9 ott 2094 · DOI 10.2094/ep.71.1031</p>
+
+  <section class="abstract">
+    <h2>Abstract</h2>
+    <p>La Sindrome del 2092 è riconducibile al drink che, dalla notte di Halloween del 2034, ha conquistato il mondo. Analizzando settant'anni di registri sanitari e agricoli dimostriamo che l'agente responsabile è rimasto innocuo per decenni grazie a un ingrediente un tempo presente in ogni cucina, e oggi scomparso. Confrontando gli additivi alimentari più comuni, individuiamo inoltre una combinazione che produce una catalisi di gran lunga superiore a tutte le altre.</p>
+  </section>
+
+  <h2>1. Introduzione</h2>
+  <p>I primi casi della Sindrome sono stati registrati nel 2092, cinquantotto anni dopo la nascita del drink. Il ritardo ha a lungo confuso la ricerca: com'è possibile che una bevanda consumata ogni giorno da centinaia di milioni di persone diventi pericolosa solo dopo generazioni? La risposta, come mostriamo, non sta nel drink ma in ciò che gli è venuto a mancare.</p>
+
+  <h2>2. Un antidoto naturale scomparso</h2>
+  <p>Incrociando i registri di consumo con quelli agricoli emerge una correlazione inversa netta: finché una certa coltura era diffusa, i casi erano nulli. Con la moria degli agrumeti, iniziata intorno alla metà del secolo, e la scomparsa dell'ultimo esemplare nel 2091, l'agente non ha più incontrato il suo neutralizzatore. In laboratorio, anche poche gocce di quel succo ne annullano l'effetto.</p>
+
+  <h2>3. Catalisi</h2>
+  <p>Abbiamo misurato l'inattivazione dell'agente con gli additivi più comuni nelle cucine di inizio secolo, seguendo per via colorimetrica il viraggio di ciascun campione (Fig. 1). Alcuni additivi, da soli, sono efficaci; altri quasi per nulla. Una sola coppia, però, produce una catalisi potentissima, che porta l'inattivazione quasi al cento per cento.</p>
+
+  <figure>
+    <svg viewBox="0 0 640 370" width="100%" role="img" aria-label="Indice di inattivazione per additivo">
+      <line class="axis" x1="230" y1="6" x2="230" y2="330"/>
+      <line class="axis" x1="230" y1="330" x2="620" y2="330"/>
+      <g id="bars"></g>
+      <text class="val" x="230" y="358">0%</text>
+      <text class="val" x="425" y="358" text-anchor="middle">50%</text>
+      <text class="val" x="620" y="358" text-anchor="end">100%</text>
+    </svg>
+    <figcaption><b>Figura 1.</b> Indice di inattivazione dell'agente dopo 60 secondi, per additivo (media di 40 prove). Dosi per bicchiere: succo di mezzo limone; un pizzico di sale; un cucchiaino di zucchero o di aceto.</figcaption>
+  </figure>
+
+  <h2>4. Dosi</h2>
+  <p>Le dosi riportate in Fig. 1 sono sufficienti per un bicchiere di bevanda. Quantità maggiori non aumentano l'efficacia.</p>
+
+  <h2>5. Conclusioni</h2>
+  <p>L'antidoto esiste, ma uno dei suoi ingredienti non esiste più. Nel 2094 non siamo in grado di prepararlo.</p>
+
+  <h2>Bibliografia</h2>
+  <ol class="refs">
+    <li>Archivio Sanitario Padano, <i>Registri dei ricoveri 2060–2093</i>.</li>
+    <li>Haraldsen T., <i>L'estinzione degli agrumi</i>, Epic Paper 68 (2091).</li>
+  </ol>
+
+  <div class="foot">© 2094 Epic Paper · Consorzio delle menti superiori. La riproduzione per menti inferiori è vietata.</div>
+</article>
+<script>
+  var dati = [["Nessun additivo",0],["Zucchero",3],["Sale",8],["Aceto",14],["Aceto + sale",19],["Limone",41],["Limone + zucchero",44],["Limone + sale",97]];
+  var g = document.getElementById("bars"), ns = "http://www.w3.org/2000/svg", h = 32, gap = 8;
+  dati.forEach(function (d, i) {
+    var y = 10 + i * (h + gap), top = d[0] === "Limone + sale", w = Math.max(2, d[1] * 3.9);
+    function el(tag, attrs, txt) { var e = document.createElementNS(ns, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (txt != null) e.textContent = txt; g.appendChild(e); }
+    el("text", { "class": "lab", x: 220, y: y + 23, "text-anchor": "end", "font-weight": top ? 600 : 400 }, d[0]);
+    el("rect", { "class": "b" + (top ? " top" : ""), x: 231, y: y, width: w, height: h, rx: 2 });
+    el("text", { "class": "val" + (top ? " top" : ""), x: 231 + w + 6, y: y + 23, "text-anchor": top ? "end" : "start", dx: top ? -12 : 0, style: top ? "fill:#fff" : "" }, d[1] + "%");
+  });
+</script>
+</body>
+</html>
